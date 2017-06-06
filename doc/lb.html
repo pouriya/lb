@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module lb</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="README.html" target="overviewFrame">Examples</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module lb</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>
+            Load-Balancer for spreading messages to processes and
+            ports.
+
+<p><b>Version:</b>  17.05.04</p>
+<p><b>Authors:</b> Pouriya Jahanbakhsh (<a href="mailto:pouriya.jahanbakhsh@gmail.com"><tt>pouriya.jahanbakhsh@gmail.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2>
+            Load-Balancer for spreading messages to processes and
+            ports.
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-error">error()</a></h3>
+<p><tt>error() = {error, {Reason::atom(), ErrorParams::list()}}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-lb">lb()</a></h3>
+<p><tt>lb() = pid() | atom()</tt></p>
+
+
+<h3 class="typedecl"><a name="type-object">object()</a></h3>
+<p><tt>object() = pid() | port()</tt></p>
+
+
+<h3 class="typedecl"><a name="type-register_name">register_name()</a></h3>
+<p><tt>register_name() = {local, atom()} | {global, atom()} | {via, module(), term()}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-send_type">send_type()</a></h3>
+<p><tt>send_type() = one_for_one | one_for_all</tt></p>
+
+
+<h3 class="typedecl"><a name="type-start_option">start_option()</a></h3>
+<p><tt>start_option() = {debug, [] | [<a href="sys.html#type-dbg_opt">sys:dbg_opt()</a>]} | {timeout, timeout()} | {spanw_opts, [] | [<a href="proc_lib.html#type-spawn_option">proc_lib:spawn_option()</a>]}</tt></p>
+
+
+<h3 class="typedecl"><a name="type-start_options">start_options()</a></h3>
+<p><tt>start_options() = [] | [<a href="#type-start_option">start_option()</a>]</tt></p>
+
+
+<h3 class="typedecl"><a name="type-start_return">start_return()</a></h3>
+<p><tt>start_return() = {ok, pid()} | {error, term()}</tt></p>
+
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#get_object-1">get_object/1</a></td><td>
+       returns an object.</td></tr>
+<tr><td valign="top"><a href="#get_objects-1">get_objects/1</a></td><td>
+       returns all available objects.</td></tr>
+<tr><td valign="top"><a href="#send-2">send/2</a></td><td>
+       sends one_for_one message to load-balancer synchronously.</td></tr>
+<tr><td valign="top"><a href="#send-3">send/3</a></td><td>
+       sends message to load-balancer synchronously with defined send
+       type.</td></tr>
+<tr><td valign="top"><a href="#send_async-2">send_async/2</a></td><td>
+       sends one_for_one message to load-balancer asynchronously.</td></tr>
+<tr><td valign="top"><a href="#send_async-3">send_async/3</a></td><td>
+       sends message to load-balancer asynchronously with defined send
+       type.</td></tr>
+<tr><td valign="top"><a href="#send_sync-2">send_sync/2</a></td><td>
+       sends one_for_one message to load-balancer synchronously.</td></tr>
+<tr><td valign="top"><a href="#send_sync-3">send_sync/3</a></td><td>
+       sends message to load-balancer synchronously with defined send
+       type.</td></tr>
+<tr><td valign="top"><a href="#start_link-0">start_link/0</a></td><td>
+       Starts and links a load-balancer.</td></tr>
+<tr><td valign="top"><a href="#start_link-1">start_link/1</a></td><td>
+       Starts and links a load-balancer.</td></tr>
+<tr><td valign="top"><a href="#start_link-2">start_link/2</a></td><td>
+       Starts and links a load-balancer.</td></tr>
+<tr><td valign="top"><a href="#subscribe-1">subscribe/1</a></td><td>
+       Subscribes caller to receiving messages from load-balancer.</td></tr>
+<tr><td valign="top"><a href="#subscribe-2">subscribe/2</a></td><td>
+       Subscribes object to receiving messages from load-balancer.</td></tr>
+<tr><td valign="top"><a href="#unsubscribe-1">unsubscribe/1</a></td><td>
+       Unsubscribes caller to receiving messages from load-balancer.</td></tr>
+<tr><td valign="top"><a href="#unsubscribe-2">unsubscribe/2</a></td><td>
+       Unsubscribes object to receiving messages from load-balancer.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="get_object-1">get_object/1</a></h3>
+<div class="spec">
+<p><tt>get_object(LB::<a href="#type-lb">lb()</a>) -&gt; {ok, <a href="#type-object">object()</a>} | <a href="#type-error">error()</a></tt><br></p>
+</div><p>
+       returns an object. <br>
+       in next call returns next object an so on.</p>
+
+<h3 class="function"><a name="get_objects-1">get_objects/1</a></h3>
+<div class="spec">
+<p><tt>get_objects(LB::<a href="#type-lb">lb()</a>) -&gt; [] | [<a href="#type-object">object()</a>]</tt><br></p>
+</div><p>
+       returns all available objects.</p>
+
+<h3 class="function"><a name="send-2">send/2</a></h3>
+<div class="spec">
+<p><tt>send(LB::<a href="#type-lb">lb()</a>, Msg::term()) -&gt; ok | <a href="#type-error">error()</a></tt><br></p>
+</div><p>Equivalent to <tt>send_sync(LB, Msg) and send_sync(LB, Msg, one_for_one)</tt>.</p>
+<p>
+       sends one_for_one message to load-balancer synchronously.</p>
+
+<h3 class="function"><a name="send-3">send/3</a></h3>
+<div class="spec">
+<p><tt>send(LB::<a href="#type-lb">lb()</a>, Msg::term(), SendType::<a href="#type-send_type">send_type()</a>) -&gt; ok | <a href="#type-error">error()</a></tt><br></p>
+</div><p>Equivalent to <a href="#send_sync-3"><tt>send_sync(LB, Msg, SendType)</tt></a>.</p>
+<p>
+       sends message to load-balancer synchronously with defined send
+       type.</p>
+
+<h3 class="function"><a name="send_async-2">send_async/2</a></h3>
+<div class="spec">
+<p><tt>send_async(LB::<a href="#type-lb">lb()</a>, Msg::term()) -&gt; ok</tt><br></p>
+</div><p>Equivalent to <a href="#send_async-3"><tt>send_async(LB, Msg, one_for_one)</tt></a>.</p>
+<p>
+       sends one_for_one message to load-balancer asynchronously.</p>
+
+<h3 class="function"><a name="send_async-3">send_async/3</a></h3>
+<div class="spec">
+<p><tt>send_async(LB::<a href="#type-lb">lb()</a>, Msg::term(), SendType::<a href="#type-send_type">send_type()</a>) -&gt; ok</tt><br></p>
+</div><p>
+       sends message to load-balancer asynchronously with defined send
+       type.</p>
+
+<h3 class="function"><a name="send_sync-2">send_sync/2</a></h3>
+<div class="spec">
+<p><tt>send_sync(LB::<a href="#type-lb">lb()</a>, Msg::term()) -&gt; ok | <a href="#type-error">error()</a></tt><br></p>
+</div><p>
+       sends one_for_one message to load-balancer synchronously.</p>
+
+<h3 class="function"><a name="send_sync-3">send_sync/3</a></h3>
+<div class="spec">
+<p><tt>send_sync(LB::<a href="#type-lb">lb()</a>, Msg::term(), SendType::<a href="#type-send_type">send_type()</a>) -&gt; ok | <a href="#type-error">error()</a></tt><br></p>
+</div><p>
+       sends message to load-balancer synchronously with defined send
+       type.</p>
+
+<h3 class="function"><a name="start_link-0">start_link/0</a></h3>
+<div class="spec">
+<p><tt>start_link() -&gt; <a href="#type-start_return">start_return()</a></tt><br></p>
+</div><p>
+       Starts and links a load-balancer.</p>
+
+<h3 class="function"><a name="start_link-1">start_link/1</a></h3>
+<div class="spec">
+<p><tt>start_link(Name_or_Opts::<a href="#type-register_name">register_name()</a> | <a href="#type-start_options">start_options()</a>) -&gt; <a href="#type-start_return">start_return()</a></tt><br></p>
+</div><p>
+       Starts and links a load-balancer.
+       Argument can be Opts or registered name.</p>
+
+<h3 class="function"><a name="start_link-2">start_link/2</a></h3>
+<div class="spec">
+<p><tt>start_link(Name::<a href="#type-register_name">register_name()</a>, Opts::<a href="#type-start_options">start_options()</a>) -&gt; <a href="#type-start_return">start_return()</a></tt><br></p>
+</div><p>
+       Starts and links a load-balancer.
+       Load-balancer will register its name.</p>
+
+<h3 class="function"><a name="subscribe-1">subscribe/1</a></h3>
+<div class="spec">
+<p><tt>subscribe(LB::<a href="#type-lb">lb()</a>) -&gt; ok</tt><br></p>
+</div><p>Equivalent to <a href="#subscribe-2"><tt>subscribe(LB, erlang:self())</tt></a>.</p>
+<p>
+       Subscribes caller to receiving messages from load-balancer.</p>
+
+<h3 class="function"><a name="subscribe-2">subscribe/2</a></h3>
+<div class="spec">
+<p><tt>subscribe(LB::<a href="#type-lb">lb()</a>, Object::<a href="#type-object">object()</a>) -&gt; ok</tt><br></p>
+</div><p>
+       Subscribes object to receiving messages from load-balancer.</p>
+
+<h3 class="function"><a name="unsubscribe-1">unsubscribe/1</a></h3>
+<div class="spec">
+<p><tt>unsubscribe(LB::<a href="#type-lb">lb()</a>) -&gt; ok</tt><br></p>
+</div><p>Equivalent to <a href="#unsubscribe-2"><tt>unsubscribe(LB, erlang:self())</tt></a>.</p>
+<p>
+       Unsubscribes caller to receiving messages from load-balancer.</p>
+
+<h3 class="function"><a name="unsubscribe-2">unsubscribe/2</a></h3>
+<div class="spec">
+<p><tt>unsubscribe(LB::<a href="#type-lb">lb()</a>, Object::<a href="#type-object">object()</a>) -&gt; ok</tt><br></p>
+</div><p>
+       Unsubscribes object to receiving messages from load-balancer.</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="README.html" target="overviewFrame">Examples</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc, Jun 6 2017, 11:30:04.</i></p>
+</body>
+</html>

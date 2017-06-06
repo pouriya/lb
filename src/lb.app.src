@@ -1,0 +1,8 @@
+{application
+,lb
+,[{description, "Load-Balancer for spreading Erlang messages."}
+ ,{vsn, "17.6.6"}
+ ,{applications, [kernel, stdlib]}
+ ,{maintainers, ["pouriya.jahanbakhsh@gmail.com"]}
+ ,{licenses, ["BSD 3-Clause"]}
+ ,{links, [{"Github", "https://github.com/Pouriya-Jahanbakhsh/lb"}]}]}.
