@@ -34,7 +34,7 @@
 %%% POSSIBILITY OF SUCH DAMAGE.
 %%% --------------------------------------------------------------------
 %% @author   Pouriya Jahanbakhsh <pouriya.jahanbakhsh@gmail.com>
-%% @version  17.6.6
+%% @version  17.6.12
 %% @doc
 %%           Load-Balancer for spreading messages to processes and
 %%           ports.
