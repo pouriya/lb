@@ -885,9 +885,22 @@ reply(Name, Dbg, {Pid, Tag}=From, Msg) ->
 
 
 do_subscribe(#?STATE{objects = []}=State, Object) ->
+    do_monitor(Object),
     {State#?STATE{objects = [Object], object = Object}, ok};
 do_subscribe(#?STATE{objects = Objects}=State, Object) ->
+    do_monitor(Object),
     {State#?STATE{objects = [Object|Objects]}, ok}.
+
+
+
+
+
+
+
+do_monitor(Object) when erlang:is_pid(Object) ->
+    erlang:monitor(process, Object);
+do_monitor(Object) when erlang:is_port(Object) ->
+    erlang:monitor(port, Object).
 
 
 
