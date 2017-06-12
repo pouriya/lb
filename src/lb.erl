@@ -557,7 +557,7 @@ process_msg(Parent
            ,{?GEN_CAST, {?ONE_FOR_ALL, Msg}=DbgEvent}) ->
     case send(debug(Name, Dbg, DbgEvent)
              ,State
-             ,?ONE_FOR_ONE
+             ,?ONE_FOR_ALL
              ,Msg) of
         {Dbg3, State2, ok} ->
             loop(Parent, Dbg3, State2);
