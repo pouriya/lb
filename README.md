@@ -28,7 +28,7 @@ Compiled src/lb.erl
 
 
 # How to use?
-If you need a real example, I reccomend to see [**this post**](http://codefather.org/posts/Using_Erlang_process_Load-Balancer_(example).html).  
+If you need a real example, I recommend to see [**this post**](http://codefather.org/posts/Using_Erlang_process_Load-Balancer_(example).html).  
 
 You need to start a **Load-Balancer** and your process which wants to receive Erlang messages from **Load-Balancer** should subscribe to **Load-Balancer**:
 
