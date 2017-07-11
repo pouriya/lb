@@ -1,5 +1,5 @@
 # Load-Balancer
-Porcess for spreading Erlang messages to Erlang process(es) or port(s).
+Process for spreading Erlang messages to Erlang process(es) or port(s).
 
 
 # Download
